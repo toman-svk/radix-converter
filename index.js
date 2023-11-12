@@ -1,19 +1,31 @@
-// Get the input element and output element by their ids
-const userInput = document.getElementById("inputValue");
-const outputElement = document.getElementById("outputValue");
+const inputValue = document.getElementById("inputValue");
+const outputValue = document.getElementById("outputValue");
+const inputNumberBase = document.getElementById("inputNumberBase");
+const outputNumberBase = document.getElementById("outputNumberBase");
 
-// Add an event listener to the input field to handle input changes
-userInput.addEventListener("input", function() {
-    // Get the user's input value
-    const inputValue = parseFloat(userInput.value); // Parse as a number
+function updateOutput() {
 
-    // Check if the input is a valid number
-    if (!isNaN(inputValue)) {
-        // Calculate and display the result (input multiplied by 5)
-        const result = inputValue * 5;
-        outputElement.textContent = `Result: ${result}`;
+    const inputValueNum = parseInt(inputValue.value);
+    const inputBaseNum = parseInt(inputNumberBase.value);
+    const outputBaseNum = parseInt(outputNumberBase.value);
+
+    if (!isNaN(inputValueNum) && !isNaN(inputBaseNum) && !isNaN(outputBaseNum)) {ß
+
+        const converter = new NumberConverter(inputValueNum, inputBaseNum, outputBaseNum);
+
+        if (converter.inputValueIsValid && converter.inputBaseIsValid && converter.outputBaseIsValid) {
+
+            outputValue.textContent = "first check done."
+
+        } else {
+            outputValue.textContent = "Please enter valid inputs.";
+
+        }
     } else {
-        // Display an error message if the input is not a valid number
-        outputElement.textContent = "Please enter a valid number.";
+
     }
-});
+};
+
+inputValue.addEventListener("input", updateOutput)
+inputNumberBase.addEventListener("input", updateOutput)
+outputNumberBase.addEventListener("input", updateOutput)
