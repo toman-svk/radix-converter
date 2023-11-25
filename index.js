@@ -1,31 +1,44 @@
 const inputValue = document.getElementById("inputValue");
 const outputValue = document.getElementById("outputValue");
-const inputNumberBase = document.getElementById("inputNumberBase");
-const outputNumberBase = document.getElementById("outputNumberBase");
+const inputBasis = document.getElementById("inputNumberBase");
+const outputBasis = document.getElementById("outputNumberBase");
 
 function updateOutput() {
 
-    const inputValueNum = parseInt(inputValue.value);
-    const inputBaseNum = parseInt(inputNumberBase.value);
-    const outputBaseNum = parseInt(outputNumberBase.value);
+    const inputValueString = inputValue.value.toString();
+    const inputBasisString = inputBasis.value.toString();
+    const outputBasisString = outputBasis.value.toString();
 
-    if (!isNaN(inputValueNum) && !isNaN(inputBaseNum) && !isNaN(outputBaseNum)) {ß
+    if (!isNaN(inputValueString) && !isNaN(inputBasisString) && !isNaN(outputBasisString)) {
 
-        const converter = new NumberConverter(inputValueNum, inputBaseNum, outputBaseNum);
+        const converter = new NumberConverter(inputValueString, inputBasisString, outputBasisString);
 
-        if (converter.inputValueIsValid && converter.inputBaseIsValid && converter.outputBaseIsValid) {
+        if (converter.inputValueIsValid && converter.inputBasisIsValid && converter.outputBasisIsValid) {
 
-            outputValue.textContent = "first check done."
+            console.log("Input value is valid: " + converter.inputValueIsValid)
+            console.log("Input base is valid: " + converter.inputBasisIsValid)
+            console.log("Output base is valid: " + converter.outputBasisIsValid)
+
+            converter.convertToDecimalBasis();
+            converter.convertFromDecimalToOutputBasis();
+            outputValue.textContent = converter.outputValue;
+            console.log("Output value is " + converter.outputValue)
 
         } else {
             outputValue.textContent = "Please enter valid inputs.";
+            console.log("Input value is valid: " + converter.inputValueIsValid)
+            console.log("Input base is valid: " + converter.inputBasisIsValid)
+            console.log("Output base is valid: " + converter.outputBasisIsValid)
 
         }
-    } else {
+    } 
 
-    }
+
+
 };
 
 inputValue.addEventListener("input", updateOutput)
 inputNumberBase.addEventListener("input", updateOutput)
 outputNumberBase.addEventListener("input", updateOutput)
+
+
